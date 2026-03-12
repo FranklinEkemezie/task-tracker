@@ -27,7 +27,7 @@
             </div>
 
             <label class="flex items-center gap-2 text-sm text-slate-600">
-                <input type="checkbox" name="remember" class="h-4 w-4 rounded border-slate-300 text-[#1a73e8] focus:ring-[#1a73e8]" />
+                <input type="checkbox" name="remember" value="1" class="h-4 w-4 rounded border-slate-300 text-[#1a73e8] focus:ring-[#1a73e8]" />
                 Remember me for 30 days
             </label>
 
