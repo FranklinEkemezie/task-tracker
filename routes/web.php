@@ -3,13 +3,20 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\PasswordResetController;
+use App\Support\Toast;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+
     return view('welcome');
 });
 
-Route::redirect('/', '/dashboard');
+Route::get('/', function () {
+
+    Toast::warning('Redirected to dashboard...');
+
+    return redirect()->route('dashboard');
+});
 
 
 Route::middleware('guest')->group(function () {
@@ -57,10 +64,13 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::view('/dashboard', 'dashboard.overview')->name('dashboard');
+    Route::get('/dashboard', function () {
+
+        return view('dashboard.overview');
+    })->name('dashboard');
+
     Route::view('/tasks/completed', 'dashboard.tasks-completed')->name('tasks.completed');
     Route::view('/tasks/in-progress', 'dashboard.tasks-in-progress')->name('tasks.in-progress');
     Route::view('/tasks/board', 'dashboard.task-board')->name('tasks.board');
 
 });
-

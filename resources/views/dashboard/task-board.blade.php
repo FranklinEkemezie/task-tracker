@@ -5,7 +5,7 @@
     </div>
 
     <div class="mt-6 flex flex-wrap items-center gap-6 border-b border-slate-200 text-sm font-medium text-slate-500">
-        <button class="pb-3 border-b-2 border-[#1a73e8] text-[#1a73e8]">To Do</button>
+        <button class="pb-3 border-b-2 border-brand-500 text-brand-500">To Do</button>
         <button class="pb-3">In Progress</button>
         <button class="pb-3">Completed</button>
     </div>
@@ -26,11 +26,7 @@
                 </div>
                 <h3 class="mt-3 text-lg font-semibold text-slate-900">{{ $title }}</h3>
                 <div class="mt-2 flex items-center gap-2 text-xs text-slate-500">
-                    <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.6">
-                        <rect x="4" y="5" width="16" height="15" rx="2" />
-                        <path d="M8 3v4" />
-                        <path d="M16 3v4" />
-                    </svg>
+                    <x-icons.calendar />
                     Due: {{ $due }}
                 </div>
                 <div class="mt-4 flex items-center justify-between text-xs text-slate-500">
@@ -45,10 +41,7 @@
 
         <div class="flex h-full min-h-[260px] flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-white p-6 text-center text-slate-500">
             <div class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400">
-                <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 5v14" />
-                    <path d="M5 12h14" />
-                </svg>
+                <x-icons.plus />
             </div>
             <p class="mt-4 text-sm font-medium">Add New Task</p>
         </div>

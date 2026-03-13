@@ -4,18 +4,15 @@
             <h1 class="text-2xl font-semibold text-slate-900">In Progress Tasks</h1>
             <p class="mt-1 text-sm text-slate-500">You have 4 tasks currently active across 2 projects.</p>
         </div>
-        <button class="inline-flex items-center gap-2 rounded-xl bg-[#1a73e8] px-4 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(26,115,232,0.25)]">
-            <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14" />
-                <path d="M5 12h14" />
-            </svg>
+        <x-buttons.primary class="px-4 py-2">
+            <x-icons.plus />
             New Task
-        </button>
+        </x-buttons.primary>
     </div>
 
     <div class="mt-6 flex flex-wrap items-center gap-6 border-b border-slate-200 text-sm font-medium text-slate-500">
         <button class="pb-3">To Do</button>
-        <button class="pb-3 border-b-2 border-[#1a73e8] text-[#1a73e8]">In Progress</button>
+        <button class="pb-3 border-b-2 border-brand-500 text-brand-500">In Progress</button>
         <button class="pb-3">Completed</button>
     </div>
 
@@ -40,18 +37,18 @@
                         <p class="mt-1 text-sm text-slate-500">{{ $desc }}</p>
                         <div class="mt-4 flex items-center justify-between text-xs font-medium text-slate-500">
                             <span>Progress</span>
-                            <span class="text-[#1a73e8]">{{ $progress }}</span>
+                            <span class="text-brand-500">{{ $progress }}</span>
                         </div>
                         <div class="mt-2 h-2 w-full rounded-full bg-slate-100">
-                            <div class="h-2 rounded-full bg-[#1a73e8]" style="width: {{ $progress }}"></div>
+                            <div class="h-2 rounded-full bg-brand-500" style="width: {{ $progress }}"></div>
                         </div>
                         <div class="mt-4 flex items-center justify-between">
                             <div class="flex -space-x-2">
                                 <div class="h-8 w-8 rounded-full border-2 border-white bg-slate-200"></div>
                                 <div class="h-8 w-8 rounded-full border-2 border-white bg-slate-300"></div>
-                                <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-[#1a73e8] text-xs font-semibold text-white">+2</div>
+                                <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-brand-500 text-xs font-semibold text-white">+2</div>
                             </div>
-                            <button class="rounded-xl border border-slate-200 bg-white px-4 py-1.5 text-xs font-semibold text-slate-600">Details</button>
+                            <x-buttons.outline type="button" class="px-4 py-1.5 text-xs">Details</x-buttons.outline>
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,9 @@
 ﻿<x-layouts.base-layout>
-    <div class="flex min-h-screen flex-col bg-[#f5f7fb]">
-        <header class="w-full border-b border-slate-200/70 bg-white/70 bg-green-500 backdrop-blur">
+    <div class="flex min-h-screen flex-col bg-canvas">
+        <header class="w-full border-b border-slate-200/70 bg-white/70 backdrop-blur">
             <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
                 <div class="flex items-center gap-3">
-                        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#e8f0ff] text-[#1a73e8]">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-500">
                             <x-icons.circle-check />
                         </span>
                     <span class="text-lg font-semibold text-slate-900">Daily Task Tracker</span>

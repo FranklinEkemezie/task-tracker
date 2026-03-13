@@ -23,18 +23,18 @@
             <x-forms.password-input name="password" />
 
             <div class="text-end">
-                <a href="{{ route('password.request') }}" class="text-xs font-medium text-[#1a73e8] hover:text-[#1558c0]">Forgot password?</a>
+                <a href="{{ route('password.request') }}" class="text-xs font-medium text-brand-500 hover:text-brand-600">Forgot password?</a>
             </div>
 
             <label class="flex items-center gap-2 text-sm text-slate-600">
-                <input type="checkbox" name="remember" value="1" class="h-4 w-4 rounded border-slate-300 text-[#1a73e8] focus:ring-[#1a73e8]" />
+                <input type="checkbox" name="remember" value="1" class="h-4 w-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500" />
                 Remember me for 30 days
             </label>
 
-            <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1a73e8] py-3 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(26,115,232,0.25)] transition hover:bg-[#1558c0]">
+            <x-buttons.primary type="submit" class="w-full">
                 Sign In
                 <x-icons.arrow-right />
-            </button>
+            </x-buttons.primary>
         </form>
 
         <div class="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">
@@ -44,19 +44,19 @@
         </div>
 
         <div class="mt-5 grid grid-cols-2 gap-3">
-            <button type="button" class="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white py-2.5 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">
+            <x-buttons.outline type="button" class="py-2.5">
                 <x-icons.google />
                 Google
-            </button>
-            <button type="button" class="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white py-2.5 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50">
+            </x-buttons.outline>
+            <x-buttons.outline type="button" class="py-2.5">
                 <x-icons.github />
                 GitHub
-            </button>
+            </x-buttons.outline>
         </div>
 
         <p class="mt-6 text-center text-sm text-slate-500">
             Don&#39;t have an account?
-            <a href="{{ route('register') }}" class="font-semibold text-[#1a73e8] hover:text-[#1558c0]">Create an account</a>
+            <a href="{{ route('register') }}" class="font-semibold text-brand-500 hover:text-brand-600">Create an account</a>
         </p>
     </div>
 

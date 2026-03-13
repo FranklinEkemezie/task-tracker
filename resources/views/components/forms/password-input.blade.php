@@ -22,7 +22,7 @@
         value="{{ old($name) }}"
         autocomplete="{{ $autocomplete }}"
         placeholder="{{ $placeholder }}"
-        class="{{ (isset($icon) ? "px-10" : "px-3" ) . " py-3 w-full rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-700 placeholder:text-slate-400 focus:border-[#1a73e8] focus:outline-none focus:ring-4 focus:ring-[#1a73e8]/10" }}"
+        class="{{ (isset($icon) ? "px-10" : "px-3" ) . " py-3 w-full rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-700 placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10" }}"
         required
     />
     <button
@@ -40,5 +40,4 @@
         </span>
     </button>
 </x-forms.input-field>
-
 
