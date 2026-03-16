@@ -72,6 +72,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/categories', CategoryController::class)
         ->except('show');
 
+    Route::view('/settings', 'settings.index')->name('settings');
+
     Route::view('/tasks/completed', 'dashboard.tasks-completed')->name('tasks.completed');
     Route::view('/tasks/all', 'dashboard.task-board')->name('tasks.all');
     Route::view('/tasks/in-progress', 'dashboard.tasks-in-progress')->name('tasks.in-progress');
