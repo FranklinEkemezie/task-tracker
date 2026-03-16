@@ -1,7 +1,7 @@
 @props([
     'title' => 'Tasks',
     'subtitle' => null,
-    'activeTab' => 'board',
+    'activeTab' => 'all',
     'workspace' => 'Project Hub',
     'plan' => 'Premium Plan',
     'showCreate' => true,
@@ -10,7 +10,7 @@
 
 @php
     $tabs = [
-        ['key' => 'board', 'label' => 'Task Board', 'route' => 'tasks.board'],
+        ['key' => 'all', 'label' => 'All Tasks', 'route' => 'tasks.board'],
         ['key' => 'in-progress', 'label' => 'In Progress', 'route' => 'tasks.in-progress'],
         ['key' => 'completed', 'label' => 'Completed', 'route' => 'tasks.completed'],
     ];
