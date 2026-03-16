@@ -73,7 +73,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->except('show');
 
     Route::view('/tasks/completed', 'dashboard.tasks-completed')->name('tasks.completed');
+    Route::view('/tasks/all', 'dashboard.task-board')->name('tasks.all');
     Route::view('/tasks/in-progress', 'dashboard.tasks-in-progress')->name('tasks.in-progress');
-    Route::view('/tasks/board', 'dashboard.task-board')->name('tasks.board');
+    Route::view('/tasks/todo', 'dashboard.tasks-todo')->name('tasks.todo');
 
 });
