@@ -1,59 +1,120 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Task Tracker
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel + Blade task tracking UI with auth screens, dashboard analytics, task views, charts, toasts, and a full light/dark theme. This repo focuses on the frontend layer and reusable Blade components while keeping routes unguarded for quick previewing during development.
 
-## About Laravel
+**Highlights**
+- Auth screens (login, register, reset, verify)
+- Dashboard overview with Chart.js visuals
+- Task board, in-progress, and completed views
+- Reusable Blade components for icons, buttons, dropdowns, toasts
+- Dark mode with localStorage persistence
+- Responsive layouts built with Tailwind
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tech Stack
+- Laravel
+- Blade components
+- Tailwind CSS (via Vite)
+- Chart.js
+- Docker + Laravel Sail
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Getting Started (Sail)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```bash
+# from the project root
+./vendor/bin/sail up -d
+./vendor/bin/sail composer install
+./vendor/bin/sail npm install
+./vendor/bin/sail artisan key:generate
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail npm run dev
+```
 
-## Learning Laravel
+If you prefer to run a single command shell inside Sail:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+```bash
+./vendor/bin/sail shell
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Open the app in your browser (default Sail host):
 
-## Laravel Sponsors
+```text
+http://localhost
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Useful Commands
 
-### Premium Partners
+```bash
+./vendor/bin/sail artisan
+./vendor/bin/sail artisan migrate:fresh --seed
+./vendor/bin/sail npm run dev
+./vendor/bin/sail npm run build
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Routes (UI Preview)
 
-## Contributing
+```text
+/                   -> welcome
+/login              -> auth login
+/register           -> auth register
+/forgot-password    -> password reset request
+/verify-email       -> email verification
+/dashboard          -> dashboard overview
+/tasks/board        -> task board
+/tasks/in-progress  -> in progress tasks
+/tasks/completed    -> completed tasks
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Project Structure (Frontend)
 
-## Code of Conduct
+```text
+resources/
+  views/
+    components/
+      buttons/           # primary, outline, icon, theme toggle
+      icons/             # svg icon components
+      dropdown.blade.php
+      toast.blade.php
+      layouts/           # base, auth, app, task
+    dashboard/           # overview and task pages
+  js/
+    modules/             # dropdown, theme-toggle, dashboard-charts, etc.
+  css/
+    app.css              # design tokens and dark overrides
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Design System and Themes
+- Light and dark mode are controlled via a `dark` class on the `html` element.
+- Theme state is stored in `localStorage` under the key `theme`.
+- The toggle button lives in the user dropdown and updates `data-theme` for clarity.
 
-## Security Vulnerabilities
+## Charts
+Dashboard charts are powered by Chart.js and initialized in:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```text
+resources/js/modules/dashboard-charts.js
+```
+
+## Toasts
+Toasts are rendered from a session `toasts` array in the base layout. Each toast can include:
+
+```text
+variant: success | danger | warning | info
+title:   optional string
+message: string
+```
+
+## Task Layout
+Task pages share a common layout:
+
+```text
+resources/views/components/layouts/task-layout.blade.php
+```
+
+It includes the header, tabs, and a default "Create New Task" button on every task tab.
+
+## Notes
+- Routes are currently unguarded for UI previewing during development.
+- Auth middleware can be re-enabled later as needed.
 
 ## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
