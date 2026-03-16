@@ -24,23 +24,23 @@
             </div>
 
             <nav class="mt-10 space-y-2 text-sm font-medium">
-                <a href="{{ route('dashboard') }}" class="{{ $active === 'dashboard' ? 'bg-brand-50 text-brand-500' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
+                <a href="{{ route('dashboard') }}" class="{{ $active === 'dashboard' ? 'bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-200' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
                     <x-icons.dashboard />
                     Dashboard
                 </a>
-                <a href="{{ route('tasks.completed') }}" class="{{ $active === 'tasks' ? 'bg-brand-50 text-brand-500' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
+                <a href="{{ route('tasks.completed') }}" class="{{ $active === 'tasks' ? 'bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-200' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
                     <x-icons.tasks />
                     Tasks
                 </a>
-                <a href="{{ route('categories.index') }}" class="{{ $active === 'categories' ? 'bg-brand-50 text-brand-500' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
+                <a href="{{ route('categories.index') }}" class="{{ $active === 'categories' ? 'bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-200' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
                     <x-icons.categories />
                     Categories
                 </a>
-                <a href="#" class="{{ $active === 'projects' ? 'bg-brand-50 text-brand-500' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
+                <a href="#" class="{{ $active === 'projects' ? 'bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-200' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
                     <x-icons.projects />
                     Projects
                 </a>
-                <a href="#" class="{{ $active === 'team' ? 'bg-brand-50 text-brand-500' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
+                <a href="#" class="{{ $active === 'team' ? 'bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-200' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
                     <x-icons.team />
                     Team
                 </a>
@@ -172,23 +172,23 @@
         </div>
 
         <nav class="mt-10 space-y-2 text-sm font-medium">
-            <a href="#" class="{{ $active === 'dashboard' ? 'bg-brand-50 text-brand-500' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
+            <a href="#" class="{{ $active === 'dashboard' ? 'bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-200' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
                 <x-icons.dashboard />
                 Dashboard
             </a>
-            <a href="{{ route('tasks.completed') }}" class="{{ $active === 'tasks' ? 'bg-brand-50 text-brand-500' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
+            <a href="{{ route('tasks.completed') }}" class="{{ $active === 'tasks' ? 'bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-200' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
                 <x-icons.tasks />
                 Tasks
             </a>
-            <a href="{{ route('categories.index') }}" class="{{ $active === 'categories' ? 'bg-brand-50 text-brand-500' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
+            <a href="{{ route('categories.index') }}" class="{{ $active === 'categories' ? 'bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-200' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
                 <x-icons.categories />
                 Categories
             </a>
-            <a href="#" class="{{ $active === 'projects' ? 'bg-brand-50 text-brand-500' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
+            <a href="#" class="{{ $active === 'projects' ? 'bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-200' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
                 <x-icons.projects />
                 Projects
             </a>
-            <a href="#" class="{{ $active === 'team' ? 'bg-brand-50 text-brand-500' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
+            <a href="#" class="{{ $active === 'team' ? 'bg-brand-50 text-brand-500 dark:bg-brand-500/15 dark:text-brand-200' : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900' }} flex items-center gap-3 rounded-xl px-3 py-2">
                 <x-icons.team />
                 Team
             </a>
