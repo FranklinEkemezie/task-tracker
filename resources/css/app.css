@@ -17,6 +17,15 @@
 }
 
 @layer base {
+    :root {
+        color-scheme: light;
+    }
+
+    :root[data-theme='light'] {
+        color-scheme: light;
+        --color-canvas: #f5f7fb;
+    }
+
     .dark {
         color-scheme: dark;
         --color-canvas: #0b1220;

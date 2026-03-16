@@ -11,7 +11,7 @@
 @endphp
 
 <x-layouts.base-layout>
-    <div class="flex min-h-screen bg-slate-50 dark:bg-slate-950">
+    <div class="flex min-h-screen bg-canvas">
         <aside class="hidden w-72 flex-col border-r border-slate-200 bg-white px-6 py-6 dark:border-slate-800 dark:bg-slate-950 lg:flex">
             <div class="flex items-center gap-3">
                     <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-50 text-brand-500">
