@@ -14,7 +14,7 @@
     <script>
         (() => {
             const stored = localStorage.getItem('theme');
-            const theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            const theme = stored === 'dark' ? 'dark' : 'light';
             document.documentElement.dataset.theme = theme;
             document.documentElement.classList.toggle('dark', theme === 'dark');
         })();

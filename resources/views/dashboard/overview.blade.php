@@ -82,7 +82,7 @@
                     ['API Integration Sprint', 'Backend Team', 'Tomorrow, 10 AM', 'bg-amber-100 text-amber-600'],
                     ['Mobile App QA Review', 'Product Team', 'Friday, 2 PM', 'bg-emerald-100 text-emerald-600'],
                 ] as [$title, $team, $due, $badge])
-                    <div class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-100 bg-slate-50/60 p-4 dark:border-slate-800 dark:bg-slate-900">
+                    <div class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
                         <div class="flex items-center gap-3">
                             <span class="flex h-10 w-10 items-center justify-center rounded-xl {{ $badge }}">
                                 <x-icons.pencil />
