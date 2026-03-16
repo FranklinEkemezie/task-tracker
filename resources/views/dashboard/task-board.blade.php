@@ -1,10 +1,10 @@
 <x-app-layout active="tasks" workspace="Alex Rivera" plan="Workspace Admin">
     <div>
-        <h1 class="text-2xl font-semibold text-slate-900">Task Board</h1>
-        <p class="mt-1 text-sm text-slate-500">Manage and track your team&#39;s progress for the Q4 sprint.</p>
+        <h1 class="text-2xl font-semibold text-slate-900 dark:text-slate-100">Task Board</h1>
+        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Manage and track your team&#39;s progress for the Q4 sprint.</p>
     </div>
 
-    <div class="mt-6 flex flex-wrap items-center gap-6 border-b border-slate-200 text-sm font-medium text-slate-500">
+    <div class="mt-6 flex flex-wrap items-center gap-6 border-b border-slate-200 text-sm font-medium text-slate-500 dark:border-slate-800 dark:text-slate-400">
         <button class="pb-3 border-b-2 border-brand-500 text-brand-500">To Do</button>
         <button class="pb-3">In Progress</button>
         <button class="pb-3">Completed</button>
@@ -16,31 +16,31 @@
             ['API Integration', 'Medium Priority', 'Oct 26, 2023', 'bg-amber-100 text-amber-700', 'bg-[linear-gradient(135deg,#0f1f29,#263a4c)] text-white', '3'],
             ['User Research', 'Low Priority', 'Oct 30, 2023', 'bg-emerald-100 text-emerald-700', 'bg-[linear-gradient(135deg,#f0f2f5,#dfe7ef)]', '5/8'],
         ] as [$title, $priority, $due, $badge, $image, $meta])
-            <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-950">
                 <div class="h-28 w-full rounded-2xl {{ $image }} flex items-center justify-center">
                     <span class="text-xs font-semibold text-white/80"></span>
                 </div>
                 <div class="mt-4 flex items-center justify-between text-xs">
                     <span class="rounded-full px-3 py-1 {{ $badge }} font-semibold uppercase tracking-[0.15em]">{{ $priority }}</span>
-                    <button class="text-slate-300">•••</button>
+                    <button class="text-slate-300">...</button>
                 </div>
-                <h3 class="mt-3 text-lg font-semibold text-slate-900">{{ $title }}</h3>
-                <div class="mt-2 flex items-center gap-2 text-xs text-slate-500">
+                <h3 class="mt-3 text-lg font-semibold text-slate-900 dark:text-slate-100">{{ $title }}</h3>
+                <div class="mt-2 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                     <x-icons.calendar />
                     Due: {{ $due }}
                 </div>
-                <div class="mt-4 flex items-center justify-between text-xs text-slate-500">
+                <div class="mt-4 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
                     <div class="flex -space-x-2">
-                        <div class="h-7 w-7 rounded-full border-2 border-white bg-slate-200"></div>
-                        <div class="h-7 w-7 rounded-full border-2 border-white bg-slate-300"></div>
+                        <div class="h-7 w-7 rounded-full border-2 border-white bg-slate-200 dark:border-slate-950 dark:bg-slate-700"></div>
+                        <div class="h-7 w-7 rounded-full border-2 border-white bg-slate-300 dark:border-slate-950 dark:bg-slate-600"></div>
                     </div>
                     <span>{{ $meta }}</span>
                 </div>
             </div>
         @endforeach
 
-        <div class="flex h-full min-h-[260px] flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-white p-6 text-center text-slate-500">
-            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400">
+        <div class="flex h-full min-h-[260px] flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-white p-6 text-center text-slate-500 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400 dark:bg-slate-900 dark:text-slate-300">
                 <x-icons.plus />
             </div>
             <p class="mt-4 text-sm font-medium">Add New Task</p>

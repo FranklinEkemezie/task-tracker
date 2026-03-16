@@ -22,7 +22,7 @@
         value="{{ $value ?? old($name) }}"
         autocomplete="email"
         placeholder="{{ $placeholder }}"
-        class="{{ (isset($icon) ? "px-10" : "px-3" ) . " py-3 w-full rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-700 placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10" }}"
+        class="{{ (isset($icon) ? "px-10" : "px-3" ) . " py-3 w-full rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-700 placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:placeholder:text-slate-500" }}"
         required
     />
 </x-forms.input-field>

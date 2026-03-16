@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\PasswordResetController;
 use App\Support\Toast;
@@ -64,10 +66,11 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('/dashboard', function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 
-        return view('dashboard.overview');
-    })->name('dashboard');
+    Route::resource('/categories', CategoryController::class)
+        ->except('show');
 
     Route::view('/tasks/completed', 'dashboard.tasks-completed')->name('tasks.completed');
     Route::view('/tasks/in-progress', 'dashboard.tasks-in-progress')->name('tasks.in-progress');

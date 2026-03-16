@@ -11,7 +11,7 @@
     <div data-dropdown-trigger>
         {{ $trigger }}
     </div>
-    <div class="absolute z-20 mt-2 {{ $width }} {{ $alignment }} hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-lg" data-dropdown-menu>
+    <div class="absolute z-20 mt-2 {{ $width }} {{ $alignment }} hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-lg dark:border-slate-800 dark:bg-slate-900" data-dropdown-menu>
         {{ $content }}
     </div>
 </div>
