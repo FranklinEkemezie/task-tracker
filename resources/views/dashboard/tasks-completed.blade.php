@@ -1,22 +1,18 @@
-<x-app-layout active="tasks" workspace="Project Management" plan="Standard Plan">
-    <div class="flex flex-wrap items-start justify-between gap-6">
-        <div>
-            <h1 class="text-2xl font-semibold text-slate-900 dark:text-slate-100">Tasks</h1>
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Manage and track your team&#39;s progress.</p>
-        </div>
+<x-layouts.task-layout
+    title="Tasks"
+    subtitle="Manage and track your team's progress."
+    activeTab="completed"
+    workspace="Project Management"
+    plan="Standard Plan"
+>
+    <x-slot name="actions">
         <div class="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm shadow-sm dark:border-slate-800 dark:bg-slate-950">
             <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Completed</p>
             <p class="mt-1 text-2xl font-semibold text-brand-500">24</p>
         </div>
-    </div>
+    </x-slot>
 
-    <div class="mt-6 flex flex-wrap items-center gap-6 border-b border-slate-200 text-sm font-medium text-slate-500 dark:border-slate-800 dark:text-slate-400">
-        <a href="{{ route('tasks.board') }}"><button class="pb-3">All Tasks</button></a>
-        <button class="pb-3">In Progress</button>
-        <button class="pb-3 border-b-2 border-brand-500 text-brand-500">Completed</button>
-    </div>
-
-    <div class="mt-6 space-y-4">
+    <div class="space-y-4">
         @foreach ([
             ['Finalize marketing assets for Q3', 'Completed 2 days ago', 'Marketing'],
             ['Update client documentation', 'Completed yesterday', 'Ops'],
@@ -48,4 +44,4 @@
             <x-buttons.outline type="button">Next</x-buttons.outline>
         </div>
     </div>
-</x-app-layout>
+</x-layouts.task-layout>

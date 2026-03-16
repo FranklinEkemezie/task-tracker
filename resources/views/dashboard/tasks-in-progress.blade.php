@@ -1,22 +1,18 @@
-<x-app-layout active="tasks" workspace="Project Hub" plan="Premium Plan">
-    <div class="flex flex-wrap items-center justify-between gap-6">
-        <div>
-            <h1 class="text-2xl font-semibold text-slate-900 dark:text-slate-100">In Progress Tasks</h1>
-            <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">You have 4 tasks currently active across 2 projects.</p>
-        </div>
+<x-layouts.task-layout
+    title="In Progress Tasks"
+    subtitle="You have 4 tasks currently active across 2 projects."
+    activeTab="in-progress"
+    workspace="Project Hub"
+    plan="Premium Plan"
+>
+    <x-slot name="actions">
         <x-buttons.primary class="px-4 py-2">
             <x-icons.plus />
             New Task
         </x-buttons.primary>
-    </div>
+    </x-slot>
 
-    <div class="mt-6 flex flex-wrap items-center gap-6 border-b border-slate-200 text-sm font-medium text-slate-500 dark:border-slate-800 dark:text-slate-400">
-        <button class="pb-3">To Do</button>
-        <button class="pb-3 border-b-2 border-brand-500 text-brand-500">In Progress</button>
-        <button class="pb-3">Completed</button>
-    </div>
-
-    <div class="mt-8 grid gap-6 lg:grid-cols-2">
+    <div class="grid gap-6 lg:grid-cols-2">
         @foreach ([
             ['Mobile App Redesign', 'Designing the new component library and high-fidelity...', '65%', 'High Priority', 'Due in 2 days', 'bg-amber-100 text-amber-700', 'bg-[radial-gradient(circle_at_30%_30%,#d6efe7,#9ab7ad)]'],
             ['API Documentation', 'Updating the public API documentation with the new v...', '30%', 'Medium', 'Due in 5 days', 'bg-blue-100 text-blue-700', 'bg-[linear-gradient(135deg,#2b7a7f,#185a6d)] text-white'],
@@ -25,7 +21,7 @@
         ] as [$title, $desc, $progress, $priority, $due, $badge, $bg])
             <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950">
                 <div class="flex gap-4">
-                    <div class="h-24 w-32 rounded-2xl {{ $bg }} flex items-center justify-center">
+                    <div class="flex h-24 w-32 items-center justify-center rounded-2xl {{ $bg }}">
                         <span class="text-sm font-semibold text-white/80"></span>
                     </div>
                     <div class="flex-1">
@@ -55,4 +51,4 @@
             </div>
         @endforeach
     </div>
-</x-app-layout>
+</x-layouts.task-layout>

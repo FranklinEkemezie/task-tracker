@@ -15,9 +15,8 @@
         (() => {
             const stored = localStorage.getItem('theme');
             const theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            }
+            document.documentElement.dataset.theme = theme;
+            document.documentElement.classList.toggle('dark', theme === 'dark');
         })();
     </script>
 

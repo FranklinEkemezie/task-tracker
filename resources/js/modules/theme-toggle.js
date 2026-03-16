@@ -3,6 +3,7 @@ const THEME_KEY = 'theme';
 function applyTheme(theme) {
     const isDark = theme === 'dark';
     document.documentElement.classList.toggle('dark', isDark);
+    document.documentElement.dataset.theme = theme;
 }
 
 function resolveTheme() {
@@ -39,17 +40,24 @@ function setTheme(theme) {
     updateToggles(theme);
 }
 
+function handleToggleClick(event) {
+    const toggle = event.target.closest('[data-theme-toggle]');
+    if (!toggle) return;
+
+    const nextTheme = resolveTheme() === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+}
+
 function initThemeToggle() {
     const currentTheme = resolveTheme();
     applyTheme(currentTheme);
     updateToggles(currentTheme);
 
-    document.querySelectorAll('[data-theme-toggle]').forEach((toggle) => {
-        toggle.addEventListener('click', () => {
-            const nextTheme = resolveTheme() === 'dark' ? 'light' : 'dark';
-            setTheme(nextTheme);
-        });
-    });
+    document.addEventListener('click', handleToggleClick);
 }
 
-document.addEventListener('DOMContentLoaded', initThemeToggle);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeToggle);
+} else {
+    initThemeToggle();
+}
