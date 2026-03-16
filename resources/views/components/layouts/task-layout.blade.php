@@ -4,6 +4,8 @@
     'activeTab' => 'board',
     'workspace' => 'Project Hub',
     'plan' => 'Premium Plan',
+    'showCreate' => true,
+    'createLabel' => 'Create New Task',
 ])
 
 @php
@@ -22,11 +24,17 @@
                 <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">{{ $subtitle }}</p>
             @endif
         </div>
-        @isset($actions)
-            <div>
+        <div class="flex flex-wrap items-center gap-3">
+            @if ($showCreate)
+                <x-buttons.primary class="px-4 py-2">
+                    <x-icons.plus />
+                    {{ $createLabel }}
+                </x-buttons.primary>
+            @endif
+            @isset($actions)
                 {{ $actions }}
-            </div>
-        @endisset
+            @endisset
+        </div>
     </div>
 
     <div class="mt-6 flex flex-wrap items-center gap-6 border-b border-slate-200 text-sm font-medium dark:border-slate-800">

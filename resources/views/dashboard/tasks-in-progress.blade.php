@@ -5,13 +5,6 @@
     workspace="Project Hub"
     plan="Premium Plan"
 >
-    <x-slot name="actions">
-        <x-buttons.primary class="px-4 py-2">
-            <x-icons.plus />
-            New Task
-        </x-buttons.primary>
-    </x-slot>
-
     <div class="grid gap-6 lg:grid-cols-2">
         @foreach ([
             ['Mobile App Redesign', 'Designing the new component library and high-fidelity...', '65%', 'High Priority', 'Due in 2 days', 'bg-amber-100 text-amber-700', 'bg-[radial-gradient(circle_at_30%_30%,#d6efe7,#9ab7ad)]'],
