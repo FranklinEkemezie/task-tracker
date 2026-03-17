@@ -19,20 +19,11 @@ class CategoryController extends Controller
 
         $user = $request->user();
 
-        $categories = $user->categories()->paginate();
+        $categories = $user->categories()->latest()->paginate();
 
         return view('categories.index', ['categories' => $categories]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-
-        return view('categories.create');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -49,16 +40,6 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index');
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
-    {
-        //
-
-        return view('categories.edit', ['category' => $category]);
     }
 
     /**

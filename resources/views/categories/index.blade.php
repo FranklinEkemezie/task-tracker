@@ -12,59 +12,134 @@
         </x-buttons.primary>
     </div>
 
+    {{--  Summary and Stats  --}}
     <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        <div class="rounded-2xl bg-brand-500 p-6 text-white shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-white/80">Global Insight</p>
+            <h3 class="mt-4 text-3xl font-semibold leading-tight">Your categorization efficiency is up 14% this week.</h3>
+        </div>
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">
-            <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
-                <span class="h-1.5 w-10 rounded-full bg-brand-500"></span>
-                <span>ID: CAT-01</span>
-            </div>
-            <h2 class="mt-6 text-2xl font-semibold text-slate-900 dark:text-slate-100">Work</h2>
-            <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Professional objectives and deadlines.</p>
-            <div class="mt-6 flex items-end gap-3">
-                <span class="text-4xl font-semibold text-brand-500">24</span>
-                <span class="text-xs uppercase tracking-[0.25em] text-slate-400">Tasks Pending</span>
-            </div>
-            <div class="mt-6 flex items-center justify-between gap-3">
-                <x-buttons.outline class="w-full justify-center py-2" data-category-modal-open>Edit</x-buttons.outline>
-                <button class="text-sm font-semibold text-rose-500 hover:text-rose-600">Delete</button>
-            </div>
+            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Total Categories</p>
+            <p class="mt-4 text-3xl font-semibold text-slate-900 dark:text-slate-100">{{ $categories->total() }}</p>
         </div>
-
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">
-            <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
-                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-300">
-                    <x-icons.user />
-                </span>
-                <span>ID: CAT-02</span>
-            </div>
-            <h2 class="mt-6 text-2xl font-semibold text-slate-900 dark:text-slate-100">Personal</h2>
-            <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Self-care, home, and hobbies.</p>
-            <div class="mt-6 flex items-end gap-3">
-                <span class="text-4xl font-semibold text-amber-500">12</span>
-                <span class="text-xs uppercase tracking-[0.25em] text-slate-400">Tasks Pending</span>
-            </div>
-            <div class="mt-6 flex items-center justify-between gap-3">
-                <x-buttons.outline class="w-full justify-center py-2" data-category-modal-open>Edit</x-buttons.outline>
-                <button class="text-sm font-semibold text-rose-500 hover:text-rose-600">Delete</button>
-            </div>
+            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Active Tasks</p>
+            <p class="mt-4 text-3xl font-semibold text-slate-900 dark:text-slate-100">49</p>
         </div>
+    </div>
 
-        <div class="rounded-2xl border border-slate-900 bg-slate-900 p-6 text-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
-            <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-slate-300">
-                <span class="rounded-full bg-brand-500 px-3 py-1 text-[10px]">High Priority</span>
-                <span>ID: CAT-03</span>
+    <div>
+
+        @if($categories->count() > 0)
+
+            <h3 class="mt-12 text-2xl font-semibold text-slate-900 dark:text-slate-100">Results: Page {{ $categories->currentPage() }} of {{ $categories->lastPage() }} </h3>
+
+            <div class="mt-8 grid gap-6 lg:grid-cols-3">
+                @foreach($categories as $category)
+                    <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">
+                        <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
+                            <span class="h-1.5 w-10 rounded-full bg-brand-500"></span>
+                            <span>ID: CAT-01</span>
+                        </div>
+                        <h2 class="mt-6 text-2xl font-semibold text-slate-900 dark:text-slate-100">{{ $category['name'] }}</h2>
+                        <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Professional objectives and deadlines.</p>
+                        <div class="mt-6 flex items-end gap-3">
+                            <span class="text-4xl font-semibold text-brand-500">24</span>
+                            <span class="text-xs uppercase tracking-[0.25em] text-slate-400">Tasks Pending</span>
+                        </div>
+                        <div class="mt-6 grid grid-cols-2 gap-4 text-sm text-slate-500 dark:text-slate-400">
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.25em] text-slate-300 font-medium">Created At</p>
+                                <p>{{ $category['created_at']?->format('M d, Y g:i A') ?? 'N/A' }}</p>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-[0.25em] text-slate-300 font-medium">Updated At</p>
+                                <p>{{ $category['updated_at']?->format('M d, Y g:i A') ?? 'N/A' }}</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between gap-3">
+                            <x-buttons.outline class="w-full justify-center py-2" data-category-modal-open>Edit</x-buttons.outline>
+                            <form action="{{ route('categories.destroy', $category) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="text-sm font-semibold text-rose-500 hover:text-rose-600">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+
             </div>
-            <h2 class="mt-6 text-2xl font-semibold">Fitness</h2>
-            <p class="mt-2 text-sm text-slate-300">Health, gym, and nutrition logs.</p>
-            <div class="mt-6 flex items-end gap-3">
-                <span class="text-4xl font-semibold">08</span>
-                <span class="text-xs uppercase tracking-[0.25em] text-slate-300">Tasks Pending</span>
+
+        @else
+
+            <div class="text-center rounded-2xl border border-slate-200 dark:border-slate-800 dark:bg-slate-950 mt-8 py-12 text-lg text-slate-500 dark:text-slate-400">
+                No categories created yet
             </div>
-            <div class="mt-6 flex items-center justify-between gap-3">
-                <button class="flex-1 rounded-xl bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-600" data-category-modal-open>Edit</button>
-                <button class="text-sm font-semibold text-sky-300 hover:text-sky-200">Delete</button>
-            </div>
-        </div>
+        @endif
+
+
+    </div>
+    <div class="mt-8 grid gap-6 lg:grid-cols-3">
+
+
+{{--        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">--}}
+{{--            <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">--}}
+{{--                <span class="h-1.5 w-10 rounded-full bg-brand-500"></span>--}}
+{{--                <span>ID: CAT-01</span>--}}
+{{--            </div>--}}
+{{--            <h2 class="mt-6 text-2xl font-semibold text-slate-900 dark:text-slate-100">Work</h2>--}}
+{{--            <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Professional objectives and deadlines.</p>--}}
+{{--            <div class="mt-6 flex items-end gap-3">--}}
+{{--                <span class="text-4xl font-semibold text-brand-500">24</span>--}}
+{{--                <span class="text-xs uppercase tracking-[0.25em] text-slate-400">Tasks Pending</span>--}}
+{{--            </div>--}}
+{{--            <div class="mt-6 flex items-center justify-between gap-3">--}}
+{{--                <x-buttons.outline class="w-full justify-center py-2" data-category-modal-open>Edit</x-buttons.outline>--}}
+{{--                <button class="text-sm font-semibold text-rose-500 hover:text-rose-600">Delete</button>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+{{--        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">--}}
+{{--            <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">--}}
+{{--                <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-300">--}}
+{{--                    <x-icons.user />--}}
+{{--                </span>--}}
+{{--                <span>ID: CAT-02</span>--}}
+{{--            </div>--}}
+{{--            <h2 class="mt-6 text-2xl font-semibold text-slate-900 dark:text-slate-100">Personal</h2>--}}
+{{--            <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Self-care, home, and hobbies.</p>--}}
+{{--            <div class="mt-6 flex items-end gap-3">--}}
+{{--                <span class="text-4xl font-semibold text-amber-500">12</span>--}}
+{{--                <span class="text-xs uppercase tracking-[0.25em] text-slate-400">Tasks Pending</span>--}}
+{{--            </div>--}}
+{{--            <div class="mt-6 flex items-center justify-between gap-3">--}}
+{{--                <x-buttons.outline class="w-full justify-center py-2" data-category-modal-open>Edit</x-buttons.outline>--}}
+{{--                <button class="text-sm font-semibold text-rose-500 hover:text-rose-600">Delete</button>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+{{--        <div class="rounded-2xl border border-slate-900 bg-slate-900 p-6 text-white shadow-sm dark:border-slate-800 dark:bg-slate-900">--}}
+{{--            <div class="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-slate-300">--}}
+{{--                <span class="rounded-full bg-brand-500 px-3 py-1 text-[10px]">High Priority</span>--}}
+{{--                <span>ID: CAT-03</span>--}}
+{{--            </div>--}}
+{{--            <h2 class="mt-6 text-2xl font-semibold">Fitness</h2>--}}
+{{--            <p class="mt-2 text-sm text-slate-300">Health, gym, and nutrition logs.</p>--}}
+{{--            <div class="mt-6 flex items-end gap-3">--}}
+{{--                <span class="text-4xl font-semibold">08</span>--}}
+{{--                <span class="text-xs uppercase tracking-[0.25em] text-slate-300">Tasks Pending</span>--}}
+{{--            </div>--}}
+{{--            <div class="mt-6 flex items-center justify-between gap-3">--}}
+{{--                <button class="flex-1 rounded-xl bg-slate-700 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-600" data-category-modal-open>Edit</button>--}}
+{{--                <button class="text-sm font-semibold text-sky-300 hover:text-sky-200">Delete</button>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+    </div>
+
+
+    <div class="mt-6">
+        {{ $categories->links() }}
     </div>
 
     <div class="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950">
@@ -91,21 +166,7 @@
         </div>
     </div>
 
-    <div class="mt-8 grid gap-6 lg:grid-cols-3">
-        <div class="rounded-2xl bg-brand-500 p-6 text-white shadow-sm">
-            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-white/80">Global Insight</p>
-            <h3 class="mt-4 text-3xl font-semibold leading-tight">Your categorization efficiency is up 14% this week.</h3>
-        </div>
-        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">
-            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Total Categories</p>
-            <p class="mt-4 text-3xl font-semibold text-slate-900 dark:text-slate-100">04</p>
-        </div>
-        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">
-            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Active Tasks</p>
-            <p class="mt-4 text-3xl font-semibold text-slate-900 dark:text-slate-100">49</p>
-        </div>
-    </div>
-
+    {{--  Edit Category modal  --}}
     <div class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 lg:p-8 flex" data-category-modal>
         <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm opacity-0 transition-opacity duration-200" data-category-modal-overlay></div>
         <div class="relative z-10 w-full max-w-2xl rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950" data-category-modal-panel>
@@ -122,19 +183,27 @@
             <div class="grid gap-8 px-8 py-6 lg:grid-cols-[1.2fr_0.8fr]">
                 <div class="space-y-6">
                     <div>
-                        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Category Name</p>
+                        <label for="name" class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Category Name</label>
                         <input
+                            id="name"
+                            name="name"
                             type="text"
                             value="Personal Development"
                             class="mt-3 w-full border-b border-slate-200 bg-transparent pb-3 text-lg font-semibold text-slate-900 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:text-slate-100"
                         />
+                        <x-forms.input-error name="name" />
                     </div>
                     <div>
-                        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Description</p>
+                        <label for="name" class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Description</label>
                         <textarea
+                            id="name"
+                            name="name"
                             rows="4"
                             class="mt-3 w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
-                        >This category focuses on long-term growth, including morning routines, reading goals, and mental health maintenance.</textarea>
+                        >
+                            This category focuses on long-term growth, including morning routines, reading goals, and mental health maintenance.
+                        </textarea>
+                        <x-forms.input-error name="name" />
                     </div>
                 </div>
                 <div class="space-y-6">
@@ -174,72 +243,89 @@
         </div>
     </div>
 
+    {{--  Create Category modal  --}}
     <div class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 lg:p-8 flex" data-category-create-modal>
         <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm opacity-0 transition-opacity duration-200" data-category-modal-overlay></div>
-        <div class="relative z-10 w-full max-w-2xl rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950" data-category-modal-panel>
-            <div class="flex items-start justify-between border-b border-slate-200 px-8 py-6 dark:border-slate-800">
-                <div>
-                    <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Create Category</h2>
-                    <p class="mt-1 text-xs uppercase tracking-[0.3em] text-slate-400">Category Configuration</p>
-                </div>
-                <button type="button" class="rounded-full p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-900" data-category-modal-close>
-                    <x-icons.x-mark />
-                </button>
-            </div>
 
-            <div class="grid gap-8 px-8 py-6 lg:grid-cols-[1.2fr_0.8fr]">
-                <div class="space-y-6">
+        <form action="{{ route('categories.store') }}" method="POST">
+
+            @csrf
+
+            <div class="relative z-10 w-full max-w-2xl rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950" data-category-modal-panel>
+                <div class="flex items-start justify-between border-b border-slate-200 px-8 py-6 dark:border-slate-800">
                     <div>
-                        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Category Name</p>
-                        <input
-                            type="text"
-                            placeholder="New category name"
-                            class="mt-3 w-full border-b border-slate-200 bg-transparent pb-3 text-lg font-semibold text-slate-900 placeholder:text-slate-300 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:text-slate-100 dark:placeholder:text-slate-600"
-                        />
+                        <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Create Category</h2>
+                        <p class="mt-1 text-xs uppercase tracking-[0.3em] text-slate-400">Category Configuration</p>
                     </div>
-                    <div>
-                        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Description</p>
-                        <textarea
-                            rows="4"
-                            placeholder="Describe what this category represents..."
-                            class="mt-3 w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 placeholder:text-slate-400 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:placeholder:text-slate-500"
-                        ></textarea>
-                    </div>
+                    <button type="button" class="rounded-full p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-900" data-category-modal-close>
+                        <x-icons.x-mark />
+                    </button>
                 </div>
-                <div class="space-y-6">
-                    <div>
-                        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Select Color</p>
-                        <div class="mt-3 grid grid-cols-4 gap-3">
-                            @foreach ([
-                                'bg-brand-500',
-                                'bg-amber-500',
-                                'bg-slate-700',
-                                'bg-blue-600',
-                                'bg-violet-500',
-                                'bg-emerald-500',
-                                'bg-rose-500',
-                                'bg-slate-900'
-                            ] as $color)
-                                <button type="button" class="flex h-12 w-12 items-center justify-center rounded-xl {{ $color }} ring-2 ring-transparent ring-offset-2 ring-offset-white focus:ring-brand-500 dark:ring-offset-slate-950"></button>
-                            @endforeach
+
+                <div class="grid gap-8 px-8 py-6 lg:grid-cols-[1.2fr_0.8fr]">
+                    <div class="space-y-6">
+                        <div>
+                            <label for="name" class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Category Name</label>
+                            <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                placeholder="New category name"
+                                class="mt-3 w-full border-b border-slate-200 bg-transparent pb-3 text-lg font-semibold text-slate-900 placeholder:text-slate-300 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:text-slate-100 dark:placeholder:text-slate-600"
+                            />
+                            <x-forms.input-error name="name" />
+                        </div>
+
+                        <div>
+                            <label for="description" class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Description</label>
+                            <textarea
+                                id="description"
+                                name="description"
+                                rows="4"
+                                placeholder="Describe what this category represents..."
+                                class="mt-3 w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600 placeholder:text-slate-400 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:placeholder:text-slate-500"
+                            ></textarea>
+                            <x-forms.input-error name="description" />
+
                         </div>
                     </div>
-                    <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900">
-                        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-brand-500">Live Preview</p>
-                        <div class="mt-3 flex items-center gap-3">
-                            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500 text-white">
-                                <x-icons.sparkles />
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Select Color</p>
+                            <div class="mt-3 grid grid-cols-4 gap-3">
+                                @foreach ([
+                                    'bg-brand-500',
+                                    'bg-amber-500',
+                                    'bg-slate-700',
+                                    'bg-blue-600',
+                                    'bg-violet-500',
+                                    'bg-emerald-500',
+                                    'bg-rose-500',
+                                    'bg-slate-900'
+                                ] as $color)
+                                    <button type="button" class="flex h-12 w-12 items-center justify-center rounded-xl {{ $color }} ring-2 ring-transparent ring-offset-2 ring-offset-white focus:ring-brand-500 dark:ring-offset-slate-950"></button>
+                                @endforeach
                             </div>
-                            <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">New Category</p>
+                        </div>
+                        <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-900">
+                            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-brand-500">Live Preview</p>
+                            <div class="mt-3 flex items-center gap-3">
+                                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500 text-white">
+                                    <x-icons.sparkles />
+                                </div>
+                                <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">New Category</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="flex flex-wrap items-center justify-end gap-3 border-t border-slate-200 px-8 py-6 dark:border-slate-800">
+                    <x-buttons.text type="button" data-category-modal-close>Cancel</x-buttons.text>
+                    <x-buttons.primary type="submit" class="px-5 py-2">Save Category</x-buttons.primary>
+                </div>
             </div>
 
-            <div class="flex flex-wrap items-center justify-end gap-3 border-t border-slate-200 px-8 py-6 dark:border-slate-800">
-                <x-buttons.text type="button" data-category-modal-close>Cancel</x-buttons.text>
-                <x-buttons.primary type="button" class="px-5 py-2">Save Category</x-buttons.primary>
-            </div>
-        </div>
+        </form>
     </div>
+
 </x-app-layout>

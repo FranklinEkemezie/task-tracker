@@ -4,7 +4,7 @@
     'label'         => 'Password',
     'name'          => 'password',
     'icon'          => 'lock',
-    'placeholder'   => '????????',
+    'placeholder'   => '••••••••••',
     'autocomplete'  => 'current-password'
 ])
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\User;
+use App\Support\Toast;
 use Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -28,8 +29,12 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
 
+            Toast::success('You have been logged in successfully.');
+
             return redirect()->intended(route('dashboard'));
         }
+
+        Toast::error('Invalid email or password.');
 
         return redirect()->back()->withInput($request->only('email', 'remember'))
             ->withErrors([

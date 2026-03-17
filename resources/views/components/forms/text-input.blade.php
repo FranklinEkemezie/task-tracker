@@ -4,7 +4,7 @@
     'name',
     'type'  => 'text',
     'label',
-    'placeholder',
+    'placeholder' => '',
     'icon',
     'value'
 ])
