@@ -28,7 +28,14 @@
                         <div class="h-7 w-7 rounded-full border-2 border-white bg-slate-300 dark:border-slate-950 dark:bg-slate-600"></div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <x-buttons.icon variant="outline" data-task-edit-open>
+                        <x-buttons.icon
+                            variant="outline"
+                            data-task-edit-open
+                            data-task-title="{{ $title }}"
+                            data-task-category="{{ $category }}"
+                            data-task-due="{{ $due }}"
+                            data-task-desc="Capture requirements and confirm timeline for this task."
+                        >
                             <x-icons.pencil />
                         </x-buttons.icon>
                         <x-buttons.icon variant="outline" class="text-rose-500 hover:text-rose-600" data-task-delete-open>

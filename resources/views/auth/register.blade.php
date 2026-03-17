@@ -1,13 +1,13 @@
 ﻿<x-layouts.auth-layout>
     <x-slot name="header">
-        <span class="text-slate-500">Already have an account?</span>
+        <span class="text-slate-500 dark:text-slate-400">Already have an account?</span>
         <a href="{{ route('login') }}" class="ml-1 font-semibold text-brand-500 hover:text-brand-600">Log In</a>
     </x-slot>
 
-    <div class="w-full max-w-[420px] rounded-2xl border border-slate-200/80 bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] sm:p-10">
+    <div class="w-full max-w-[420px] rounded-2xl border border-slate-200/80 bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-slate-800 dark:bg-slate-950 sm:p-10">
         <div>
-            <h1 class="text-2xl font-semibold text-slate-900">Create Account</h1>
-            <p class="mt-2 text-sm text-slate-500">Start tracking your productivity today with our minimal workspace.</p>
+            <h1 class="text-2xl font-semibold text-slate-900 dark:text-slate-100">Create Account</h1>
+            <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Start tracking your productivity today with our minimal workspace.</p>
         </div>
 
         <form class="mt-8 space-y-5" method="POST" action="{{ route('register.post') }}">
@@ -44,7 +44,7 @@
                 icon="lock"
             />
 
-            <label class="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+            <label class="flex flex-wrap items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
                 <input type="checkbox" name="terms" class="h-4 w-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500" required />
                 I agree to the
                 <a href="#" class="font-medium text-brand-500 hover:text-brand-600">Terms of Service</a>
@@ -58,10 +58,10 @@
             </x-buttons.primary>
         </form>
 
-        <div class="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">
-            <span class="h-px flex-1 bg-slate-200"></span>
+        <div class="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 dark:text-slate-600">
+            <span class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
             Or continue with
-            <span class="h-px flex-1 bg-slate-200"></span>
+            <span class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
         </div>
 
         <div class="mt-5 grid grid-cols-2 gap-3">

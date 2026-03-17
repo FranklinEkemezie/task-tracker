@@ -3,10 +3,10 @@
         <a href="#" class="font-medium text-slate-600 transition hover:text-slate-900">Help</a>
     </x-slot>
 
-    <div class="w-full max-w-[420px] rounded-2xl border border-slate-200/80 bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] sm:p-10">
+    <div class="w-full max-w-[420px] rounded-2xl border border-slate-200/80 bg-white p-8 shadow-[0_20px_60px_rgba(15,23,42,0.08)] dark:border-slate-800 dark:bg-slate-950 sm:p-10">
         <div class="text-center">
-            <h1 class="text-2xl font-semibold text-slate-900">Welcome Back</h1>
-            <p class="mt-2 text-sm text-slate-500">Please enter your details to sign in</p>
+            <h1 class="text-2xl font-semibold text-slate-900 dark:text-slate-100">Welcome Back</h1>
+            <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Please enter your details to sign in</p>
         </div>
 
         <form class="mt-8 space-y-5" method="POST" action="{{ route('login.post') }}">
@@ -26,7 +26,7 @@
                 <a href="{{ route('password.request') }}" class="text-xs font-medium text-brand-500 hover:text-brand-600">Forgot password?</a>
             </div>
 
-            <label class="flex items-center gap-2 text-sm text-slate-600">
+            <label class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
                 <input type="checkbox" name="remember" value="1" class="h-4 w-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500" />
                 Remember me for 30 days
             </label>
@@ -37,10 +37,10 @@
             </x-buttons.primary>
         </form>
 
-        <div class="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">
-            <span class="h-px flex-1 bg-slate-200"></span>
+        <div class="mt-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 dark:text-slate-600">
+            <span class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
             Or continue with
-            <span class="h-px flex-1 bg-slate-200"></span>
+            <span class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
         </div>
 
         <div class="mt-5 grid grid-cols-2 gap-3">
@@ -54,7 +54,7 @@
             </x-buttons.outline>
         </div>
 
-        <p class="mt-6 text-center text-sm text-slate-500">
+        <p class="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
             Don&#39;t have an account?
             <a href="{{ route('register') }}" class="font-semibold text-brand-500 hover:text-brand-600">Create an account</a>
         </p>

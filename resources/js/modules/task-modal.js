@@ -26,7 +26,7 @@ function wireModal(modal, openSelector) {
     closeButtons.forEach((button) => button.addEventListener('click', closeModal));
     overlay?.addEventListener('click', closeModal);
 
-    return { closeModal };
+    return { openButtons, openModal, closeModal };
 }
 
 function wireCategorySelect(modal) {
@@ -49,11 +49,34 @@ function initTaskModal() {
     const deleteModal = document.querySelector('[data-task-delete-modal]');
 
     wireModal(createModal, '[data-task-modal-open]');
-    wireModal(editModal, '[data-task-edit-open]');
+    const edit = wireModal(editModal, '[data-task-edit-open]');
     wireModal(deleteModal, '[data-task-delete-open]');
 
     wireCategorySelect(createModal);
     wireCategorySelect(editModal);
+
+    edit?.openButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            if (!editModal) return;
+            const title = button.dataset.taskTitle || '';
+            const category = button.dataset.taskCategory || '__none__';
+            const due = button.dataset.taskDue || '';
+            const desc = button.dataset.taskDesc || '';
+
+            const titleInput = editModal.querySelector('[data-task-title-input]');
+            const dueInput = editModal.querySelector('[data-task-due-input]');
+            const descInput = editModal.querySelector('[data-task-desc-input]');
+            const categorySelect = editModal.querySelector('[data-task-category-select]');
+
+            if (titleInput) titleInput.value = title;
+            if (dueInput) dueInput.value = due;
+            if (descInput) descInput.value = desc;
+            if (categorySelect) categorySelect.value = category;
+
+            const categoryNew = editModal.querySelector('[data-task-category-new]');
+            if (categoryNew) categoryNew.classList.add('hidden');
+        });
+    });
 
     document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {

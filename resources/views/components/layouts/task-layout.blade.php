@@ -58,7 +58,7 @@
 
     <div class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 lg:p-8 flex" data-task-modal>
         <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm opacity-0 transition-opacity duration-200" data-task-modal-overlay></div>
-        <div class="relative z-10 w-full max-w-2xl rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950" data-task-modal-panel>
+        <div class="relative z-10 w-full max-w-2xl rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950 max-h-[calc(100vh-4rem)] overflow-y-auto" data-task-modal-panel>
             <div class="flex items-start justify-between border-b border-slate-200 px-8 py-6 dark:border-slate-800">
                 <div>
                     <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Create New Task</h2>
@@ -145,7 +145,7 @@
 
     <div class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 lg:p-8 flex" data-task-edit-modal>
         <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm opacity-0 transition-opacity duration-200" data-task-modal-overlay></div>
-        <div class="relative z-10 w-full max-w-2xl rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950" data-task-modal-panel>
+        <div class="relative z-10 w-full max-w-2xl rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950 max-h-[calc(100vh-4rem)] overflow-y-auto" data-task-modal-panel>
             <div class="flex items-start justify-between border-b border-slate-200 px-8 py-6 dark:border-slate-800">
                 <div>
                     <h2 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Edit Task</h2>
@@ -163,6 +163,7 @@
                         type="text"
                         value="Update Design System"
                         class="mt-3 w-full border-b border-slate-200 bg-transparent pb-3 text-lg font-semibold text-slate-900 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:text-slate-100"
+                        data-task-title-input
                     />
                 </div>
 
@@ -199,6 +200,7 @@
                             <input
                                 type="date"
                                 class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+                                data-task-due-input
                             />
                             <span class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-slate-400">
                                 <x-icons.calendar />
@@ -212,6 +214,7 @@
                     <textarea
                         rows="4"
                         class="mt-3 w-full rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-600 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+                        data-task-desc-input
                     >Refine the task requirements and update relevant assets.</textarea>
                 </div>
             </div>
@@ -225,7 +228,7 @@
 
     <div class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 lg:p-8 flex" data-task-delete-modal>
         <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm opacity-0 transition-opacity duration-200" data-task-modal-overlay></div>
-        <div class="relative z-10 w-full max-w-md rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950" data-task-modal-panel>
+        <div class="relative z-10 w-full max-w-md rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950 max-h-[calc(100vh-4rem)] overflow-y-auto" data-task-modal-panel>
             <div class="flex items-start justify-between border-b border-slate-200 px-6 py-5 dark:border-slate-800">
                 <div>
                     <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Delete Task</h2>

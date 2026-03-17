@@ -12,7 +12,7 @@
 
 <x-layouts.base-layout>
     <div class="flex min-h-screen bg-canvas">
-        <aside class="hidden w-72 flex-col border-r border-slate-200 bg-white px-6 py-6 dark:border-slate-800 dark:bg-slate-950 lg:flex">
+        <aside class="hidden h-screen w-72 flex-col overflow-y-auto border-r border-slate-200 bg-white px-6 py-6 dark:border-slate-800 dark:bg-slate-950 lg:flex">
             <div class="flex items-center gap-3">
                     <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-50 text-brand-500">
                         <x-icons.logo-mark />
@@ -155,7 +155,7 @@
     </div>
 
     <div class="fixed inset-0 z-40 hidden bg-slate-900/40 dark:bg-black/60 lg:hidden" data-sidebar-overlay></div>
-    <aside class="fixed inset-y-0 left-0 z-50 w-72 -translate-x-full flex-col border-r border-slate-200 bg-white px-6 py-6 transition-transform duration-200 dark:border-slate-800 dark:bg-slate-950 lg:hidden" data-sidebar-panel>
+    <aside class="fixed inset-y-0 left-0 z-50 h-screen w-72 -translate-x-full flex-col overflow-y-auto border-r border-slate-200 bg-white px-6 py-6 transition-transform duration-200 dark:border-slate-800 dark:bg-slate-950 lg:hidden" data-sidebar-panel>
         <div class="flex items-center justify-between gap-3">
             <div class="flex items-center gap-3">
                     <span class="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-50 text-brand-500">

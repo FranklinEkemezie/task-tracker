@@ -181,7 +181,7 @@
 
     <div class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 lg:p-8 flex" data-settings-photo-modal>
         <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm opacity-0 transition-opacity duration-200" data-settings-photo-overlay></div>
-        <div class="relative z-10 w-full max-w-md rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950" data-settings-photo-panel>
+        <div class="relative z-10 w-full max-w-md rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950 max-h-[calc(100vh-4rem)] overflow-y-auto" data-settings-photo-panel>
             <div class="flex items-start justify-between border-b border-slate-200 px-6 py-5 dark:border-slate-800">
                 <div>
                     <h2 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Update Profile Photo</h2>
