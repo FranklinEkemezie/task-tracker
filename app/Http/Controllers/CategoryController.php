@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Support\Toast;
+use Auth;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -48,6 +49,10 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         //
+
+        if (Auth::user()->cannot('update', $category)) {
+            abort(403);
+        }
 
         $category->update($request->validated());
 

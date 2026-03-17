@@ -70,7 +70,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('dashboard');
 
     Route::resource('/categories', CategoryController::class)
-        ->except(['show', 'create', 'edit']);
+        ->except(['show', 'create', 'edit'])
+        ->middlewareFor(['update', 'destroy'], 'can:manage,category');
 
     Route::view('/settings', 'settings.index')->name('settings');
 
