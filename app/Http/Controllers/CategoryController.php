@@ -8,11 +8,13 @@ use App\Models\Category;
 use App\Support\Toast;
 use Auth;
 use Illuminate\Http\Request;
+use Throwable;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * @throws Throwable
      */
     public function index(Request $request)
     {
@@ -22,9 +24,11 @@ class CategoryController extends Controller
 
         $categories = $user->categories()->latest()->paginate();
 
-        return view('categories.index', ['categories' => $categories]);
+        return view('categories.index', [
+            'categories'    => $categories->toResourceCollection()->resolve(),
+            'links'         => fn () => $categories->links(),
+        ]);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -49,10 +53,6 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         //
-
-        if (Auth::user()->cannot('update', $category)) {
-            abort(403);
-        }
 
         $category->update($request->validated());
 

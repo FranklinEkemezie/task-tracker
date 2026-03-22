@@ -11,23 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
+        if (Schema::hasTable('users') && ! Schema::hasColumn('users', 'uuid')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->uuid()->after('id')->unique();
+            });
+        }
 
-            $table->uuid()->after('id')->unique();
-        });
+        if (Schema::hasTable('categories') && ! Schema::hasColumn('categories', 'uuid')) {
+            Schema::table('categories', function (Blueprint $table) {
+                $table->uuid()->after('id')->unique();
+            });
+        }
 
-        Schema::table('categories', function (Blueprint $table) {
-            //
-
-            $table->uuid()->after('id')->unique();
-        });
-
-        Schema::table('tasks', function (Blueprint $table) {
-            //
-
-            $table->uuid()->after('id')->unique();
-        });
+        if (Schema::hasTable('tasks') && ! Schema::hasColumn('tasks', 'uuid')) {
+            Schema::table('tasks', function (Blueprint $table) {
+                $table->uuid()->after('id')->unique();
+            });
+        }
     }
 
     /**
@@ -35,22 +35,22 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
+        if (Schema::hasTable('users') && Schema::hasColumn('users', 'uuid')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropColumn('uuid');
+            });
+        }
 
-            $table->dropColumn('uuid');
-        });
+        if (Schema::hasTable('categories') && Schema::hasColumn('categories', 'uuid')) {
+            Schema::table('categories', function (Blueprint $table) {
+                $table->dropColumn('uuid');
+            });
+        }
 
-        Schema::table('categories', function (Blueprint $table) {
-            //
-
-            $table->dropColumn('uuid');
-        });
-
-        Schema::table('tasks', function (Blueprint $table) {
-            //
-
-            $table->dropColumn('uuid');
-        });
+        if (Schema::hasTable('tasks') && Schema::hasColumn('tasks', 'uuid')) {
+            Schema::table('tasks', function (Blueprint $table) {
+                $table->dropColumn('uuid');
+            });
+        }
     }
 };

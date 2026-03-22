@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property int $user_id
  * @property int|null $category_id
  * @property string $title
@@ -22,6 +23,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Category|null $category
  * @property-read User $user
+ *
  * @method static Builder<static>|Task newModelQuery()
  * @method static Builder<static>|Task newQuery()
  * @method static Builder<static>|Task query()
@@ -35,6 +37,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Task whereTitle($value)
  * @method static Builder<static>|Task whereUpdatedAt($value)
  * @method static Builder<static>|Task whereUserId($value)
+ *
  * @mixin Eloquent
  */
 class Task extends Model
@@ -42,6 +45,15 @@ class Task extends Model
     //
 
     use HasUuids;
+
+    protected $fillable = [
+        'category_id',
+        'title',
+        'description',
+        'is_recurring',
+        'task_date',
+        'completed_at',
+    ];
 
     public function uniqueIds(): array
     {
@@ -67,8 +79,8 @@ class Task extends Model
     {
         return [
             'is_recurring' => 'boolean',
-            'is_completed' => 'datetime',
-            'task_date' => 'datetime'
+            'completed_at' => 'datetime',
+            'task_date' => 'date',
         ];
     }
 }

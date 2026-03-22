@@ -1,42 +1,66 @@
 <x-app-layout active="settings" workspace="TaskMaster" plan="Premium Plan">
     <div class="w-full max-w-5xl">
+        {{-- Section: Page header --}}
         <div class="mb-10">
             <h1 class="text-3xl font-semibold text-slate-900 dark:text-slate-100">Settings</h1>
             <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Manage your account preferences and system behavior.</p>
         </div>
 
         <div class="space-y-12">
+            {{-- Section: Profile --}}
             <section>
                 <div class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-500">
                     <span>01. Profile</span>
                     <span class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></span>
                 </div>
                 <div class="mt-6 grid gap-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950 lg:grid-cols-[140px_1fr]">
+                    {{-- Profile photo --}}
                     <div class="relative h-28 w-28">
                         <img src="https://placehold.co/160x160" alt="Profile" class="h-full w-full rounded-2xl object-cover" />
                         <button class="absolute -bottom-3 -right-3 flex h-10 w-10 items-center justify-center rounded-xl bg-brand-500 text-white shadow-lg" data-settings-photo-open>
                             <x-icons.pencil />
                         </button>
                     </div>
+
+                    {{-- Profile form fields --}}
                     <div class="grid gap-4 lg:grid-cols-2">
                         <div>
-                            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Full Name</p>
-                            <div class="mt-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200">Alex Architect</div>
+                            <label class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400" for="settings-name">Full Name</label>
+                            <input
+                                id="settings-name"
+                                type="text"
+                                value="Alex Architect"
+                                class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+                            />
                         </div>
                         <div>
-                            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Email Address</p>
-                            <div class="mt-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200">alex.design@work.com</div>
+                            <label class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400" for="settings-email">Email Address</label>
+                            <input
+                                id="settings-email"
+                                type="email"
+                                value="alex.design@work.com"
+                                class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+                            />
                         </div>
                         <div class="lg:col-span-2">
-                            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Bio</p>
-                            <div class="mt-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300">
-                                Product Designer focusing on high-velocity task management systems. Based in New York.
-                            </div>
+                            <label class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400" for="settings-bio">Bio</label>
+                            <textarea
+                                id="settings-bio"
+                                rows="3"
+                                class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm text-slate-600 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+                            >Product Designer focusing on high-velocity task management systems. Based in New York.</textarea>
+                        </div>
+
+                        {{-- Profile actions --}}
+                        <div class="flex flex-wrap items-center justify-end gap-3 lg:col-span-2">
+                            <x-buttons.text type="button">Discard changes</x-buttons.text>
+                            <x-buttons.primary type="button" class="px-5 py-2">Save Preferences</x-buttons.primary>
                         </div>
                     </div>
                 </div>
             </section>
 
+            {{-- Section: Account security --}}
             <section>
                 <div class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-500">
                     <span>02. Account Security</span>
@@ -64,6 +88,7 @@
                 </div>
             </section>
 
+            {{-- Section: Notifications --}}
             <section>
                 <div class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-500">
                     <span>03. Notifications</span>
@@ -109,7 +134,7 @@
                             </div>
                             <div>
                                 <p class="text-sm font-semibold text-slate-900 dark:text-slate-100">Quiet Hours</p>
-                                <p class="text-xs text-slate-600 dark:text-slate-300">Scheduled focus time: 22:00 ? 07:00</p>
+                                <p class="text-xs text-slate-600 dark:text-slate-300">Scheduled focus time: 22:00 - 07:00</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-3">
@@ -124,6 +149,7 @@
                 </div>
             </section>
 
+            {{-- Section: Personalization --}}
             <section>
                 <div class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-500">
                     <span>04. Personalization</span>
@@ -171,15 +197,11 @@
                     </div>
                 </div>
             </section>
-
-            <div class="flex flex-wrap items-center justify-end gap-3">
-                <x-buttons.text type="button">Discard changes</x-buttons.text>
-                <x-buttons.primary type="button" class="px-5 py-2">Save Preferences</x-buttons.primary>
-            </div>
         </div>
     </div>
 
-    <div class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 lg:p-8 flex" data-settings-photo-modal>
+    {{-- Modal: Update profile photo --}}
+    <div class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 lg:p-8" data-settings-photo-modal>
         <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm opacity-0 transition-opacity duration-200" data-settings-photo-overlay></div>
         <div class="relative z-10 w-full max-w-md rounded-2xl bg-white shadow-2xl opacity-0 transition-all duration-200 translate-y-4 scale-95 dark:bg-slate-950 max-h-[calc(100vh-4rem)] overflow-y-auto" data-settings-photo-panel>
             <div class="flex items-start justify-between border-b border-slate-200 px-6 py-5 dark:border-slate-800">

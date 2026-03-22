@@ -9,6 +9,7 @@ function initSettingsPhotoModal() {
 
     const openModal = () => {
         modal.classList.remove('hidden');
+        modal.classList.add('flex');
         requestAnimationFrame(() => {
             overlay.classList.remove('opacity-0');
             panel.classList.remove('opacity-0', 'translate-y-4', 'scale-95');
@@ -20,6 +21,7 @@ function initSettingsPhotoModal() {
         panel.classList.add('opacity-0', 'translate-y-4', 'scale-95');
         setTimeout(() => {
             modal.classList.add('hidden');
+            modal.classList.remove('flex');
         }, 200);
     };
 

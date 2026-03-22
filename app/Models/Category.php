@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property int $user_id
  * @property string $name
  * @property Carbon|null $created_at
@@ -20,6 +21,7 @@ use Illuminate\Support\Carbon;
  * @property-read Collection<int, Task> $tasks
  * @property-read int|null $tasks_count
  * @property-read User $user
+ *
  * @method static Builder<static>|Category newModelQuery()
  * @method static Builder<static>|Category newQuery()
  * @method static Builder<static>|Category query()
@@ -28,6 +30,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder<static>|Category whereName($value)
  * @method static Builder<static>|Category whereUpdatedAt($value)
  * @method static Builder<static>|Category whereUserId($value)
+ *
  * @mixin Eloquent
  */
 class Category extends Model
@@ -37,6 +40,10 @@ class Category extends Model
     use HasUuids;
 
     protected $fillable = ['name'];
+
+    protected $hidden = [
+        'id',
+    ];
 
     public function uniqueIds(): array
     {

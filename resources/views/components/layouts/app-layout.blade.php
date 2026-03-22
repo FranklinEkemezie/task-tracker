@@ -1,13 +1,13 @@
 @props([
-    'active' => 'tasks',
+    'active'    => 'tasks',
     'workspace' => 'Project Management',
-    'plan' => 'Standard Plan',
+    'plan'      => 'Standard Plan',
 ])
 
 @php
-    $name = auth()->user()->name ?? 'Account';
-    $initials = str($name)->explode(' ')->map(fn (string $word) => $word[0] ?? '')->join('');
-    $avatar = auth()->user()->avatar_url ?? null;
+    $name       = auth()->user()->name ?? 'Account';
+    $initials   = str($name)->explode(' ')->map(fn (string $word) => $word[0] ?? '')->join('');
+    $avatar     = auth()->user()->avatar_url ?? null;
 @endphp
 
 <x-layouts.base-layout>

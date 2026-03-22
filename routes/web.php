@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\TaskController;
 use App\Support\Toast;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,6 @@ Route::get('/', function () {
 
     return redirect()->route('dashboard');
 });
-
 
 Route::middleware('guest')->group(function () {
 
@@ -75,9 +75,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::view('/settings', 'settings.index')->name('settings');
 
-    Route::view('/tasks/completed', 'dashboard.tasks-completed')->name('tasks.completed');
-    Route::view('/tasks/all', 'dashboard.task-board')->name('tasks.all');
-    Route::view('/tasks/in-progress', 'dashboard.tasks-in-progress')->name('tasks.in-progress');
-    Route::view('/tasks/todo', 'dashboard.tasks-todo')->name('tasks.todo');
+    Route::get('/tasks/all', [TaskController::class, 'index'])->name('tasks.all');
+    Route::get('/tasks/todo', [TaskController::class, 'todo'])->name('tasks.todo');
+    Route::get('/tasks/in-progress', [TaskController::class, 'inProgress'])->name('tasks.in-progress');
+    Route::get('/tasks/completed', [TaskController::class, 'completed'])->name('tasks.completed');
+    Route::patch('/tasks/{task}/toggle', [TaskController::class, 'toggle'])
+        ->name('tasks.toggle')
+        ->middleware('can:manage,task');
+    Route::resource('/tasks', TaskController::class)
+        ->except(['index', 'create', 'edit', 'show'])
+        ->middlewareFor(['update', 'destroy'], 'can:manage,task');
 
 });

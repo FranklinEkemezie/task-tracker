@@ -8,6 +8,7 @@ function wireModal(modal, openSelector) {
 
     const openModal = () => {
         modal.classList.remove('hidden');
+        modal.classList.add('flex');
         requestAnimationFrame(() => {
             overlay.classList.remove('opacity-0');
             panel.classList.remove('opacity-0', 'translate-y-4', 'scale-95');
@@ -19,12 +20,14 @@ function wireModal(modal, openSelector) {
         panel.classList.add('opacity-0', 'translate-y-4', 'scale-95');
         setTimeout(() => {
             modal.classList.add('hidden');
+            modal.classList.remove('flex');
         }, 200);
     };
 
     openButtons.forEach((button) => button.addEventListener('click', openModal));
     closeButtons.forEach((button) => button.addEventListener('click', closeModal));
     overlay?.addEventListener('click', closeModal);
+    panel?.addEventListener('click', (event) => event.stopPropagation());
 
     return { openButtons, openModal, closeModal };
 }
@@ -62,19 +65,52 @@ function initTaskModal() {
             const category = button.dataset.taskCategory || '__none__';
             const due = button.dataset.taskDue || '';
             const desc = button.dataset.taskDesc || '';
+            const recurring = button.dataset.taskRecurring === '1';
+            const taskId = button.dataset.taskId;
 
             const titleInput = editModal.querySelector('[data-task-title-input]');
             const dueInput = editModal.querySelector('[data-task-due-input]');
             const descInput = editModal.querySelector('[data-task-desc-input]');
             const categorySelect = editModal.querySelector('[data-task-category-select]');
+            const recurringInput = editModal.querySelector('[data-task-recurring-input]');
+            const editForm = editModal.querySelector('[data-task-edit-form]');
 
             if (titleInput) titleInput.value = title;
             if (dueInput) dueInput.value = due;
             if (descInput) descInput.value = desc;
-            if (categorySelect) categorySelect.value = category;
+            if (categorySelect) {
+                categorySelect.value = category;
+                if (categorySelect.value !== category) {
+                    categorySelect.value = '__none__';
+                }
+                categorySelect.dispatchEvent(new Event('change'));
+            }
+            if (recurringInput) recurringInput.checked = recurring;
 
             const categoryNew = editModal.querySelector('[data-task-category-new]');
             if (categoryNew) categoryNew.classList.add('hidden');
+
+            if (editForm && taskId) {
+                const template = decodeURI(editForm.getAttribute('data-task-edit-action'));
+                if (template) {
+                    editForm.action = template.replace('[id]', taskId);
+                }
+            }
+        });
+    });
+
+    const deleteButtons = document.querySelectorAll('[data-task-delete-open]');
+    deleteButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            if (!deleteModal) return;
+            const taskId = button.dataset.taskId;
+            const deleteForm = deleteModal.querySelector('[data-task-delete-form]');
+            if (deleteForm && taskId) {
+                const template = decodeURI(deleteForm.getAttribute('data-task-delete-action') || '');
+                if (template) {
+                    deleteForm.action = template.replace('[id]', taskId);
+                }
+            }
         });
     });
 
@@ -86,7 +122,10 @@ function initTaskModal() {
                 const panel = modal.querySelector('[data-task-modal-panel]');
                 overlay?.classList.add('opacity-0');
                 panel?.classList.add('opacity-0', 'translate-y-4', 'scale-95');
-                setTimeout(() => modal.classList.add('hidden'), 200);
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 200);
             });
         }
     });
