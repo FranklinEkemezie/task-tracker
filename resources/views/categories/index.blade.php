@@ -1,4 +1,3 @@
-@props(['categories'])
 <x-app-layout active="categories" workspace="Daily Task Tracker" plan="Task Management">
     {{-- Section: Page header --}}
     <div class="flex flex-wrap items-start justify-between gap-6">
@@ -22,11 +21,11 @@
         </div>
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">
             <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Total Categories</p>
-            <p class="mt-4 text-3xl font-semibold text-slate-900 dark:text-slate-100">04</p>
+            <p class="mt-4 text-4xl font-semibold text-slate-900 dark:text-slate-100">{{ $categoryCount }}</p>
         </div>
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">
             <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Active Tasks</p>
-            <p class="mt-4 text-3xl font-semibold text-slate-900 dark:text-slate-100">49</p>
+            <p class="mt-4 text-4xl font-semibold text-slate-900 dark:text-slate-100">{{ $tasksCount }}</p>
         </div>
     </div>
 

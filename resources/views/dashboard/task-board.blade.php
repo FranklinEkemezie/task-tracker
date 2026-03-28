@@ -34,6 +34,6 @@
 
     {{-- Section: Pagination --}}
     <div class="mt-6">
-        {{ $tasks->links() }}
+        {{ $links() }}
     </div>
 </x-layouts.task-layout>

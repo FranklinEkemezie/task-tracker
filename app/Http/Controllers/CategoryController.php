@@ -27,6 +27,8 @@ class CategoryController extends Controller
         return view('categories.index', [
             'categories'    => $categories->toResourceCollection()->resolve(),
             'links'         => fn () => $categories->links(),
+            'categoryCount' => $categories->total(),
+            'tasksCount'    => $user->tasks()->count(),
         ]);
     }
 

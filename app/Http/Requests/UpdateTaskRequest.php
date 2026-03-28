@@ -24,11 +24,11 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string', 'max:2000'],
-            'is_recurring' => ['nullable', 'boolean'],
-            'task_date' => ['nullable', 'date'],
-            'category_id' => [
+            'title'         => ['required', 'string', 'max:255'],
+            'description'   => ['nullable', 'string', 'max:2000'],
+            'is_recurring'  => ['nullable', 'boolean'],
+            'task_date'     => ['nullable', 'date'],
+            'category_id'   => [
                 'nullable',
                 Rule::exists('categories', 'id')->where('user_id', $this->user()?->id),
             ],

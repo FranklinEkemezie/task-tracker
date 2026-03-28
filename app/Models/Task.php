@@ -18,7 +18,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $description
  * @property bool $is_recurring
  * @property Carbon|null $task_date
- * @property string|null $completed_at
+ * @property Carbon|null $completed_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Category|null $category
@@ -78,9 +78,9 @@ class Task extends Model
     protected function casts(): array
     {
         return [
-            'is_recurring' => 'boolean',
-            'completed_at' => 'datetime',
-            'task_date' => 'date',
+            'is_recurring'  => 'boolean',
+            'completed_at'  => 'datetime',
+            'task_date'     => 'date',
         ];
     }
 }

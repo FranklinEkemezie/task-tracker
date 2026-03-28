@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class TaskController extends Controller
@@ -21,32 +22,22 @@ class TaskController extends Controller
         $query = $this->baseQuery($request);
 
         $status = $request->string('status')->toString();
-        if ($status === 'completed') {
-            $query->whereNotNull('completed_at');
-        }
-        if ($status === 'incomplete') {
-            $query->whereNull('completed_at');
-        }
-
-        $category = $request->string('category')->toString();
-        if ($category !== '') {
-            $query->where('category_id', $category);
-        }
-
-        $this->applyDateRange($query, $request);
+        $query
+            ->when($status === 'completed', fn ($query) => $query->whereNotNull('completed_at'))
+            ->when($status === 'incomplete', fn ($query) => $query->whereNotNull('completed_at'))
+            ->when($request->filled('category'), fn ($query) => $query->where('category_id', '=', $request['category']))
+            ->when($request->filled('date_from'), fn ($query) => $query->whereDate('task_date', '>=', $request['date_from']))
+            ->when($request->filled('date_to'), fn ($query) => $query->whereDate('task_date', '<=', $request['date_to']))
+            ->latest();
 
         $tasks = $query->paginate(9)->withQueryString();
         $categories = $request->user()->categories()->orderBy('name')->get();
 
         return view('dashboard.task-board', [
-            'tasks'         => $tasks,
+            'tasks'         => $tasks->toResourceCollection()->resolve(),
+            'links'         => fn () => $tasks->links(),
             'categories'    => $categories,
-            'filters'       => [
-                'status'    => $status,
-                'category'  => $category,
-                'from'      => $request->string('from')->toString(),
-                'to'        => $request->string('to')->toString(),
-            ],
+            'filters'       => $request->only(['status', 'category', 'date_from', 'date_to'])
         ]);
     }
 
@@ -58,8 +49,9 @@ class TaskController extends Controller
             ->paginate(8);
 
         return view('dashboard.tasks-todo', [
-            'tasks' => $tasks,
-            'categories' => $request->user()->categories()->orderBy('name')->get(),
+            'tasks'         => $tasks->toResourceCollection()->resolve(),
+            'links'         => fn () => $tasks->links(),
+            'categories'    => $request->user()->categories()->orderBy('name')->get(),
         ]);
     }
 
@@ -71,8 +63,9 @@ class TaskController extends Controller
             ->paginate(8);
 
         return view('dashboard.tasks-in-progress', [
-            'tasks' => $tasks,
-            'categories' => $request->user()->categories()->orderBy('name')->get(),
+            'tasks'         => $tasks->toResourceCollection()->resolve(),
+            'links'         => fn () => $tasks->links(),
+            'categories'    => $request->user()->categories()->orderBy('name')->get(),
         ]);
     }
 
@@ -83,8 +76,9 @@ class TaskController extends Controller
             ->paginate(8);
 
         return view('dashboard.tasks-completed', [
-            'tasks' => $tasks,
-            'categories' => $request->user()->categories()->orderBy('name')->get(),
+            'tasks'         => $tasks->toResourceCollection()->resolve(),
+            'links'         => fn () => $tasks->links(),
+            'categories'    => $request->user()->categories()->orderBy('name')->get(),
         ]);
     }
 
@@ -112,8 +106,13 @@ class TaskController extends Controller
     public function update(UpdateTaskRequest $request, Task $task): RedirectResponse
     {
 
-        $data       = $request->validated();
-        $category   = $this->resolveCategory($request->user(), $data);
+        $data = $request->validated();
+
+        $category = $this->resolveCategory($request->user(), $data);
+        if ($request->user()->cannot('manage', $category)) {
+            Toast::warning('The given category does not exist!');
+            throw ValidationException::withMessages(['category_id' => 'The given category does not exist.']);
+        }
 
         $task->category()->associate($category);
         $task->update([
@@ -155,33 +154,6 @@ class TaskController extends Controller
         return $request->user()->tasks()->with('category')->latest()->getQuery();
     }
 
-    private function applyDateRange(Builder $query, Request $request): void
-    {
-        $from = $this->parseDate($request->string('from')->toString());
-        $to = $this->parseDate($request->string('to')->toString());
-
-        if ($from) {
-            $query->whereDate('task_date', '>=', $from);
-        }
-
-        if ($to) {
-            $query->whereDate('task_date', '<=', $to);
-        }
-    }
-
-    private function parseDate(string $value): ?Carbon
-    {
-        if ($value === '') {
-            return null;
-        }
-
-        try {
-            return Carbon::createFromFormat('Y-m-d', $value);
-        } catch (\Throwable $exception) {
-            return null;
-        }
-    }
-
     /**
      * @param  array<string, mixed>  $data
      */
@@ -198,7 +170,7 @@ class TaskController extends Controller
         }
 
         /** @var Category $category */
-        $category = $$user->categories()->firstOrCreate([
+        $category = $user->categories()->firstOrCreate([
             'name' => $name,
         ]);
 
