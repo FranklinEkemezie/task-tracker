@@ -14,14 +14,15 @@ use Illuminate\Support\Carbon;
  * @property string $uuid
  * @property int $user_id
  * @property int|null $category_id
+ * @property int|null $recurring_task_id
  * @property string $title
  * @property string|null $description
- * @property bool $is_recurring
- * @property Carbon|null $task_date
+ * @property Carbon $task_date
  * @property Carbon|null $completed_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Category|null $category
+ * @property-write RecurringTask|null $recurringTask
  * @property-read User $user
  *
  * @method static Builder<static>|Task newModelQuery()
@@ -47,10 +48,11 @@ class Task extends Model
     use HasUuids;
 
     protected $fillable = [
+        'user_id',
         'category_id',
+        'recurring_task_id',
         'title',
         'description',
-        'is_recurring',
         'task_date',
         'completed_at',
     ];
@@ -75,10 +77,14 @@ class Task extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function recurringTask(): BelongsTo
+    {
+        return $this->belongsTo(RecurringTask::class);
+    }
+
     protected function casts(): array
     {
         return [
-            'is_recurring'  => 'boolean',
             'completed_at'  => 'datetime',
             'task_date'     => 'date',
         ];

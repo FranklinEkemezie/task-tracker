@@ -93,7 +93,6 @@ class TaskController extends Controller
         $task       = $user->tasks()->make([
             'title'         => $data['title'],
             'description'   => $data['description'] ?? null,
-            'is_recurring'  => (bool) ($data['is_recurring'] ?? false),
             'task_date'     => $data['task_date'] ?? null,
         ]);
         $task->category()->associate($category)->save();
@@ -118,7 +117,6 @@ class TaskController extends Controller
         $task->update([
             'title'         => $data['title'],
             'description'   => $data['description'] ?? null,
-            'is_recurring'  => (bool) ($data['is_recurring'] ?? false),
             'task_date'     => $data['task_date'] ?? null,
         ]);
 

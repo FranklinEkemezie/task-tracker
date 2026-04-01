@@ -80,8 +80,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
-        DB::listen(function (QueryExecuted $query) {
-            \Log::info($query->sql, ['bindings' => $query->bindings, 'time' => $query->time]);
-        });
+//        DB::listen(function (QueryExecuted $query) {
+//            \Log::info($query->sql, ['bindings' => $query->bindings, 'time' => $query->time]);
+//        });
     }
 }

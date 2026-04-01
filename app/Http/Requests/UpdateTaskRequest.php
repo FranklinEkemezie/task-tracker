@@ -26,8 +26,7 @@ class UpdateTaskRequest extends FormRequest
         return [
             'title'         => ['required', 'string', 'max:255'],
             'description'   => ['nullable', 'string', 'max:2000'],
-            'is_recurring'  => ['nullable', 'boolean'],
-            'task_date'     => ['nullable', 'date'],
+            'task_date'     => ['date'],
             'category_id'   => [
                 'nullable',
                 Rule::exists('categories', 'id')->where('user_id', $this->user()?->id),
